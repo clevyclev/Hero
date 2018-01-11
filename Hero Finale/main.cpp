@@ -32,17 +32,18 @@ public:
     //The following two methods are necessary for displaying the inventory size and contents.
     void Show_Stock();
     void Show_Inventory();
+    
     void Roll_Call(){
         cout << "The current heroes are as follows!\n";
         for (auto const& c : Heroes)
             std::cout << c << ' ';
     };
+    vector<string> Heroes;
     
 private:
     int m_Health;
     int m_Morale;
     string m_Name;
-    vector<string> Heroes;
     
     string story = " wakes up alone in a barren field to the whispers of the sagebrush.\nHe knows nothing of his circumstances…where he came from, how he got here, but most importantly, WHO brought him here.\nUpon analysis of his situation…his tattered clothing and his aches and pains all over…he can tell one thing: he’s been beaten, and left for dead.\n\nHad he pissed someone off?  Did he owe someone something?\n\nWhat had they done to him…and why couldn’t he remember anything?\nUnable to navigate his mind through the throbbing head pain, he musters the strength to stand with the help of a nearby wooden plank.\nOff in the distance, he sees a small cottage.  Maybe someone is there?  Someone who could help?\nHe begins to limp off yonder, wondering what in the hell is going on.\nUpon arrival, he finds nobody, and in a moment of staggering pain collapses, knocking over a chest of drawers containing a set of newer clothes…and a note.\n\nHe reads the note…and makes a shocking discovery that immediately sets him on a quest for the truth…and revenge.'\n\n";
     
@@ -76,7 +77,7 @@ void Hero::PassTime(int time)
 
 void Hero::Tell_Story()
 {
-    cout << "'" << m_Name << story;
+    cout << "\n'" << m_Name << story;
     cout << "My name is " << m_Name <<".\n";
     cout << "I'm a hero and I feel ";
     
@@ -163,9 +164,15 @@ int main()
     do
     {
         cout << "\nHero Caretaker\n\n";
-        cout << "Choose a hero for this game.\n\n" << "1 - Jack\n" << "2 - Bronson\n" << "3 - Vincenzo\n\n";
-        
+        cout << "Choose a hero for this game by entering his corresponding number.\n\n" << "1 - Jack\n" << "2 - Bronson\n" << "3 - Vincenzo\n\n";
         cin >> hero;
+        while (hero < 1 || hero > 3 || cin.fail()){
+            cin.clear();
+            cin.ignore();
+            cout << "You must choose from the available options!  No letters, either!\nTry again!\n" << "Choose a hero for this game by entering his corresponding number.\n\n" << "1 - Jack\n" << "2 - Bronson\n" << "3 - Vincenzo\n\n";
+            cin >> hero;
+        }
+        
         
         switch (hero)
         {
